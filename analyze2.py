@@ -26,8 +26,9 @@ shuffle(criticalMovies)
 
 agreeableCritics = []
 answered = []
-i = 0
+i = -1
 while True:
+	i += 1
 	answer = input("Did you like %s? (y/n/s) " % criticalMovies[i])
 	answered.append(criticalMovies[i])
 	if answer == 'y':
@@ -40,17 +41,17 @@ while True:
 		continue
 	bestCritic = bestCritics[0][0]
 	print(bestCritics)
-	i += 1
 
-	moviePool = list(set(critics[bestCritic])-set(answered))
-	if len(moviePool) > 0:
-		criticsChoice = choice(moviePool)
-		answer = input("Did you like %s? (y/n/s) " % criticsChoice)
-		answered.append(criticsChoice)
-		if answer == 'y':
-			agreeableCritics += movies[criticalMovies[i]]['good']
-		if answer == 'n':
-			agreeableCritics += movies[criticalMovies[i]]['bad']
-		counter=collections.Counter(agreeableCritics)
-		bestCritics= counter.most_common(10)
-		print(bestCritics)
+	if i % 10 == 0:
+		moviePool = list(set(critics[bestCritic])-set(answered))
+		if len(moviePool) > 0:
+			criticsChoice = choice(moviePool)
+			answer = input("Did you like %s? (y/n/s) " % criticsChoice)
+			answered.append(criticsChoice)
+			if answer == 'y':
+				agreeableCritics += movies[criticalMovies[i]]['good']
+			if answer == 'n':
+				agreeableCritics += movies[criticalMovies[i]]['bad']
+			counter=collections.Counter(agreeableCritics)
+			bestCritics= counter.most_common(10)
+			print(bestCritics)
