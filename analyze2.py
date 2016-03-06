@@ -36,6 +36,8 @@ while True:
 		agreeableCritics += movies[criticalMovies[i]]['bad']
 	counter=collections.Counter(agreeableCritics)
 	bestCritics= counter.most_common(10)
+	if len(bestCritics) == 0:
+		continue
 	bestCritic = bestCritics[0][0]
 	print(bestCritics)
 	i += 1

@@ -32,12 +32,19 @@ for rootf, dirs, filenames in os.walk('criticdownloads/'):
         reviews = root.xpath('//table[@class="table table-striped"]/tr')
         for review in reviews:
             title = review.xpath('.//td/a')[0].text_content().strip()
+            year = review.xpath('.//td[@class="center"]')[0].text_content().strip()
+            if ("2017" not in year 
+                    and "2016" not in year 
+                    and "2015" not in year
+                    and "2014" not in year
+                    and "2013" not in year
+                    and "2012" not in year):
+                continue
             if title not in movies:
                 movies[title] = {}
                 movies[title]['good'] = []
                 movies[title]['bad'] = []
                 movies[title]['rtgood'] = True
-            #print(title)
             tds = review.xpath('.//td')
             num = 0 
             for td in tds:
